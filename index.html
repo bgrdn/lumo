@@ -1,25 +1,77 @@
+
+.key{
+  border-radius:50%;
+  border:none;
+  background:var(--bg3);
+  font-family:var(--mono);
+  font-size:28px;
+  font-weight:400;
+  color:var(--label);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  width:100%;
+  height:100%;
+  box-shadow:0 1px 0 rgba(0,0,0,0.08);
+  transition:background .08s, transform .08s;
+  -webkit-user-select:none;
+}
+@media(prefers-color-scheme:dark){
+  .key{box-shadow:none;background:#2c2c2e;}
+}
+.key:active{background:var(--label4);transform:scale(.94);}
+.key.zero{
+  grid-column:span 2;
+  border-radius:100px;
+  justify-content:flex-start;
+  padding-left:calc(35px + var(--sp1));
+}
+.key.dot{font-size:32px;line-height:0;padding-bottom:4px;}
+.key.del{background:var(--bg3);box-shadow:0 1px 0 rgba(0,0,0,0.08);color:var(--label2);}
+@media(prefers-color-scheme:dark){.key.del{background:#2c2c2e;box-shadow:none;}}
+.key.del:active{background:var(--label4);transform:scale(.94);}
 <!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="LUMO">
 <meta name="application-name" content="LUMO">
-<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#1a5c38">
+
 <title>LUMO</title>
 
 <!-- PWA Manifest inline -->
 <script>
 (function(){
   const icon512 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-    <rect width="512" height="512" rx="114" fill="#1a1a1a"/>
-    <text x="256" y="320" font-family="Georgia,serif" font-size="260" font-weight="700"
-          fill="#c8a96e" text-anchor="middle" letter-spacing="-8">L</text>
-    <rect x="80" y="360" width="352" height="12" rx="6" fill="#c8a96e" opacity=".35"/>
-  </svg>`;
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a5c38"/>
+      <stop offset="100%" style="stop-color:#0d3d25"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="114" fill="url(#bg)"/>
+  <!-- Subtle inner highlight top -->
+  <rect width="512" height="260" rx="114" fill="white" opacity="0.04"/>
+  <!-- L letterform — clean, geometric, SF Pro style -->
+  <text x="148" y="370"
+    font-family="-apple-system, SF Pro Display, Helvetica Neue, sans-serif"
+    font-size="290" font-weight="700"
+    fill="white"
+    filter="url(#shadow)"
+    letter-spacing="-8">L</text>
+  <!-- Bottom accent line -->
+  <rect x="100" y="400" width="200" height="8" rx="4" fill="white" opacity="0.2"/>
+</svg>`;
   const icon192 = icon512;
   const toDataUrl = svg => 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
   const manifest = {
@@ -28,8 +80,8 @@
     description: 'Gestione finanze personali',
     start_url: '.',
     display: 'standalone',
-    background_color: '#1a1a1a',
-    theme_color: '#1a1a1a',
+    background_color: '#0d3d25',
+    theme_color: '#1a5c38',
     orientation: 'portrait-primary',
     icons: [
       { src: toDataUrl(icon192), sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable' },
@@ -45,10 +97,10 @@
 </script>
 
 <!-- Apple touch icon inline (iOS "Aggiungi a schermata Home") -->
-<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjExNCIgZmlsbD0iIzFhMWExYSIvPjx0ZXh0IHg9IjI1NiIgeT0iMzIwIiBmb250LWZhbWlseT0iR2VvcmdpYSxzZXJpZiIgZm9udC1zaXplPSIyNjAiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNjOGE5NmUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGxldHRlci1zcGFjaW5nPSItOCI+TDwvdGV4dD48cmVjdCB4PSI4MCIgeT0iMzYwIiB3aWR0aD0iMzUyIiBoZWlnaHQ9IjEyIiByeD0iNiIgZmlsbD0iI2M4YTk2ZSIgb3BhY2l0eT0iLjM1Ii8+PC9zdmc+">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWE1YzM4Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6IzBkM2QyNSIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxmaWx0ZXIgaWQ9InNoYWRvdyI+CiAgICAgIDxmZURyb3BTaGFkb3cgZHg9IjAiIGR5PSI0IiBzdGREZXZpYXRpb249IjgiIGZsb29kLWNvbG9yPSIjMDAwIiBmbG9vZC1vcGFjaXR5PSIwLjI1Ii8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPCEtLSBCYWNrZ3JvdW5kIC0tPgogIDxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iMTE0IiBmaWxsPSJ1cmwoI2JnKSIvPgogIDwhLS0gU3VidGxlIGlubmVyIGhpZ2hsaWdodCB0b3AgLS0+CiAgPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSIyNjAiIHJ4PSIxMTQiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjA0Ii8+CiAgPCEtLSBMIGxldHRlcmZvcm0g4oCUIGNsZWFuLCBnZW9tZXRyaWMsIFNGIFBybyBzdHlsZSAtLT4KICA8dGV4dCB4PSIxNDgiIHk9IjM3MCIKICAgIGZvbnQtZmFtaWx5PSItYXBwbGUtc3lzdGVtLCBTRiBQcm8gRGlzcGxheSwgSGVsdmV0aWNhIE5ldWUsIHNhbnMtc2VyaWYiCiAgICBmb250LXNpemU9IjI5MCIgZm9udC13ZWlnaHQ9IjcwMCIKICAgIGZpbGw9IndoaXRlIgogICAgZmlsdGVyPSJ1cmwoI3NoYWRvdykiCiAgICBsZXR0ZXItc3BhY2luZz0iLTgiPkw8L3RleHQ+CiAgPCEtLSBCb3R0b20gYWNjZW50IGxpbmUgLS0+CiAgPHJlY3QgeD0iMTAwIiB5PSI0MDAiIHdpZHRoPSIyMDAiIGhlaWdodD0iOCIgcng9IjQiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjIiLz4KPC9zdmc+">
 
 <!-- Favicon -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='700' fill='%23c8a96e' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20style%3D%22stop-color%3A%231a5c38%22/%3E%3Cstop%20offset%3D%22100%25%22%20style%3D%22stop-color%3A%230d3d25%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22url%28%23bg%29%22/%3E%3Ctext%20x%3D%225%22%20y%3D%2225%22%20font-family%3D%22-apple-system%2Csans-serif%22%20font-size%3D%2222%22%20font-weight%3D%22700%22%20fill%3D%22white%22%3EL%3C/text%3E%3C/svg%3E">
 
 <!-- Service Worker per offline -->
 <script>
@@ -69,6 +121,7 @@ if('serviceWorker' in navigator){
   navigator.serviceWorker.register(url).catch(()=>{});
 }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -90,7 +143,7 @@ if('serviceWorker' in navigator){
   --r-xs:8px; --r-sm:10px; --r-md:13px; --r-lg:16px; --r-xl:20px; --r-full:100px;
   --tab-h:83px;
   --safe-b:env(safe-area-inset-bottom,0px);
-  --safe-t:env(safe-area-inset-top,0px);
+  --safe-t:env(safe-area-inset-top,44px);
 }
 @media(prefers-color-scheme:dark){:root{
   --bg:#000000; --bg2:#1c1c1e; --bg3:#2c2c2e;
@@ -101,7 +154,7 @@ if('serviceWorker' in navigator){
 }}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;}
 html{height:100%;}
-body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);color:var(--label);max-width:430px;margin:0 auto;-webkit-font-smoothing:antialiased;}
+body{height:100dvh;overflow:hidden;background:var(--bg);font-family:var(--sans);color:var(--label);-webkit-font-smoothing:antialiased;}
 
 /* ── Budget ── */
 .bud-row{display:flex;align-items:center;gap:var(--sp3);padding:var(--sp3) var(--sp4);position:relative;}
@@ -128,14 +181,12 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
 .bud-kpi-val{font-family:var(--mono);font-size:20px;font-weight:500;color:var(--label);line-height:1;}
 
 /* Desktop budget screen */
-@media(min-width:768px){
-  #budgetScreen{flex:1;min-height:0;overflow-y:auto;padding-bottom:var(--sp6);}
+
 }
-}
-.shell{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+.shell{display:flex;flex-direction:column;height:100dvh;overflow:hidden;position:fixed;width:100%;top:0;left:0;}
 
 /* Navbar */
-.navbar{flex-shrink:0;position:relative;z-index:9;display:flex;justify-content:space-between;align-items:flex-end;padding:calc(var(--safe-t) + var(--sp2)) var(--sp5) var(--sp3);background:transparent;transition:background .25s,border-color .25s;border-bottom:.5px solid transparent;}
+.navbar{flex-shrink:0;position:relative;z-index:9;display:flex;justify-content:space-between;align-items:flex-end;padding:calc(env(safe-area-inset-top, 44px) + 8px) 20px 12px;background:transparent;transition:background .25s,border-color .25s;border-bottom:.5px solid transparent;}
 .navbar.scrolled{background:rgba(242,242,247,.88);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom-color:var(--sep);}
 @media(prefers-color-scheme:dark){.navbar.scrolled{background:rgba(0,0,0,.88);}}
 .nav-left{display:flex;flex-direction:column;gap:0;}
@@ -152,7 +203,7 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
 /* Pager */
 .pager{flex:1;display:flex;overflow:hidden;position:relative;min-height:0;}
 .pages{display:flex;width:300%;height:100%;transition:transform .38s cubic-bezier(.32,.72,0,1);will-change:transform;}
-.page{width:calc(100% / 3);height:100%;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h) + var(--sp2));scrollbar-width:none;flex-shrink:0;}
+.page{width:calc(100% / 3);height:100%;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h) + 20px);scrollbar-width:none;flex-shrink:0;-webkit-overflow-scrolling:touch;}
 .page::-webkit-scrollbar{display:none;}
 
 /* Pull to refresh */
@@ -213,7 +264,7 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
 .empty{padding:var(--sp6) var(--sp5);text-align:center;color:var(--label3);font-size:16px;line-height:1.7;}
 
 /* Tab bar */
-.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:var(--tab-h);background:rgba(249,249,249,.94);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-top:.5px solid var(--sep);display:flex;align-items:flex-start;justify-content:space-around;padding-top:var(--sp3);padding-bottom:var(--safe-b);z-index:15;}
+.tabbar{position:fixed;bottom:0;left:0;width:100%;height:var(--tab-h);background:rgba(249,249,249,.94);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-top:.5px solid var(--sep);display:flex;align-items:flex-start;justify-content:space-around;padding-top:var(--sp3);padding-bottom:max(var(--safe-b), env(safe-area-inset-bottom, 0px));z-index:15;}
 @media(prefers-color-scheme:dark){.tabbar{background:rgba(18,18,18,.94);}}
 .tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:var(--sp1);border:none;background:none;cursor:pointer;padding:0;transition:opacity .1s;}
 .tab-btn:active{opacity:.5;}
@@ -227,7 +278,7 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
 .tab-add-circle{width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,122,255,.35);transition:transform .22s cubic-bezier(.34,1.56,.64,1),background .2s;}
 .tab-add.open .tab-add-circle{transform:rotate(45deg);background:var(--label3);box-shadow:none;}
 .tab-add-circle svg{width:22px;height:22px;stroke:#fff;stroke-width:2.5;fill:none;}
-.tab-add-lbl{font-size:10px;color:transparent;margin-top:var(--sp1);height:12px;}
+.tab-add-lbl{font-size:10px;color:var(--label3);margin-top:var(--sp1);}
 
 /* Overlay */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:20;opacity:0;pointer-events:none;transition:opacity .22s;}
@@ -400,165 +451,8 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
 .cat-section-hdr-amt{font-family:var(--mono);font-size:14px;font-weight:500;}
 
 
-/* Mobile: rispetta safe area superiore (notch/Dynamic Island) */
-@media(max-width:767px){
-  .navbar{padding-top:calc(env(safe-area-inset-top,20px) + var(--sp2));}
-}
 
-@media(min-width:768px){
-  html,body{height:100vh;overflow:hidden;}
-  body{max-width:100%;margin:0;}
 
-  /* Sidebar */
-  .navbar{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-start;
-    justify-content:flex-start;
-    height:100vh;
-    width:220px;
-    padding:36px 20px 24px;
-    border-bottom:none;
-    border-right:.5px solid var(--sep);
-    background:var(--bg2);
-    position:relative;
-    z-index:9;
-    overflow:hidden;
-  }
-  .navbar.scrolled{
-    background:var(--bg2);
-    backdrop-filter:none;
-    border-bottom:none;
-    border-right:.5px solid var(--sep);
-  }
-  .nav-left{flex-shrink:0;}
-  .large-title{font-size:26px;transition:none;}
-  .large-title.small{font-size:26px;letter-spacing:-.02em;}
-  .large-title.small~.nav-sub{opacity:1;height:auto;}
-
-  /* Month nav pill inside sidebar */
-  .month-lbl-wrap{
-    position:static;
-    transform:none;
-    margin-top:20px;
-    padding:8px 12px;
-    background:var(--bg3);
-    border-radius:var(--r-md);
-    width:100%;
-    justify-content:space-between;
-    flex-shrink:0;
-  }
-  .month-chevrons{flex-direction:row;gap:4px;}
-  .month-chevrons span{font-size:14px;}
-
-  /* Tab bar: vertical inside sidebar, pushed to bottom */
-  .tabbar{
-    position:static;
-    flex-direction:column;
-    height:auto;
-    width:100%;
-    background:transparent;
-    border-top:none;
-    padding:16px 0 0;
-    gap:2px;
-    align-items:flex-start;
-    justify-content:flex-start;
-    backdrop-filter:none;
-    margin-top:auto;
-    flex-shrink:0;
-  }
-  .tab-btn{
-    flex:none;
-    flex-direction:row;
-    width:100%;
-    gap:10px;
-    padding:9px 10px;
-    border-radius:var(--r-md);
-    justify-content:flex-start;
-  }
-  .tab-btn.active{background:var(--bg3);}
-  .tab-icon{width:20px;height:20px;}
-  .tab-icon svg{width:20px;height:20px;}
-  .tab-lbl{font-size:14px;}
-  .tab-add{
-    margin-top:0;
-    flex-direction:row;
-    width:100%;
-    gap:10px;
-    padding:4px 10px;
-    justify-content:flex-start;
-    margin-top:-4px;
-  }
-  .tab-add-circle{width:36px;height:36px;box-shadow:none;}
-  .tab-add-circle svg{width:16px;height:16px;}
-  .tab-add-lbl{font-size:14px;color:var(--label2);height:auto;margin-top:0;}
-
-  /* Shell: sidebar + content side by side */
-  .shell{
-    display:flex;
-    flex-direction:row;
-    height:100vh;
-    width:100%;
-  }
-
-  /* Content area fills remaining space */
-  #contentArea{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    min-width:0;
-    height:100vh;
-    overflow:hidden;
-  }
-  .pager{
-    flex:1;
-    display:flex;
-    overflow:hidden;
-    position:relative;
-    min-height:0;
-    width:100%;
-  }
-  .pages{
-    display:flex;
-    width:300%;
-    height:100%;
-    transition:transform .38s cubic-bezier(.32,.72,0,1);
-  }
-  .page{
-    width:calc(100% / 3);
-    height:100%;
-    overflow-y:auto;
-    padding-bottom:var(--sp6);
-  }
-  #meseScreen{
-    flex:1;
-    min-height:0;
-    overflow-y:auto;
-    padding-bottom:var(--sp6);
-  }
-  #panScreen{
-    flex:1;
-    min-height:0;
-    overflow-y:auto;
-    padding-bottom:var(--sp6);
-  }
-  #budgetScreen{
-    flex:1;
-    min-height:0;
-    overflow-y:auto;
-    padding-bottom:var(--sp6);
-  }
-
-  /* No keypad on desktop */
-  .keypad{display:none;}
-
-  /* Sheet sizing */
-  .sheet{max-width:520px;}
-  .action-sheet{max-width:480px;}
-  .toast{bottom:24px;}
-  .hero-amt{font-size:56px;}
-  .grp{margin:0 var(--sp5) var(--sp3);}
-}
 </style>
 </head>
 <body>
@@ -571,10 +465,9 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
       <div class="nav-sub">finanze personali</div>
     </div>
     <!-- Month label centred (mobile) / inline (desktop) -->
-    <div class="month-lbl-wrap" id="monthLblWrap">
-      <button class="month-arrow" onclick="changeMonth(-1)" style="background:none;border:none;color:var(--accent);font-size:20px;cursor:pointer;padding:0;line-height:1;transition:opacity .1s;" onmousedown="this.style.opacity='.4'" onmouseup="this.style.opacity='1'">‹</button>
+    <div class="month-lbl-wrap" id="monthLblWrap" onclick="haptic('light')">
       <span class="month-lbl" id="monthLabel"></span>
-      <button class="month-arrow" onclick="changeMonth(1)"  style="background:none;border:none;color:var(--accent);font-size:20px;cursor:pointer;padding:0;line-height:1;transition:opacity .1s;" onmousedown="this.style.opacity='.4'" onmouseup="this.style.opacity='1'">›</button>
+      <div class="month-chevrons"><span>▲</span><span>▼</span></div>
     </div>
   </div>
 
@@ -624,7 +517,7 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
   </div>
 
   <!-- Month screen – shown when tab1 active -->
-  <div id="meseScreen" style="display:none;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h)+8px);scrollbar-width:none;-webkit-scrollbar:none;">
+  <div id="meseScreen" style="display:none;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h) + 20px);scrollbar-width:none;">
 
     <div class="mese-page">
 
@@ -669,7 +562,7 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
   </div>
 
   <!-- Panoramica screen -->
-  <div id="panScreen" style="display:none;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h)+8px);scrollbar-width:none;">
+  <div id="panScreen" style="display:none;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h) + 20px);scrollbar-width:none;">
     <div style="padding:var(--sp4) 0 0;">
 
       <!-- KPI row -->
@@ -712,7 +605,7 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
       <div class="grp">
         <div class="grp-lbl">Patrimonio nel tempo</div>
         <div class="grp-box" style="padding:16px;">
-          <canvas id="patrimonioChart" height="160"></canvas>
+          <canvas id="patrimonioChart" height="180" style="width:100%;max-height:180px;"></canvas>
           <!-- Valore iniziale -->
           <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
             <span style="font-size:13px;color:var(--label2);">Valore iniziale</span>
@@ -730,7 +623,7 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
       <div class="grp">
         <div class="grp-lbl">Risparmi per anno</div>
         <div class="grp-box" style="padding:16px;">
-          <canvas id="risparmiChart" height="160"></canvas>
+          <canvas id="risparmiChart" height="180" style="width:100%;max-height:180px;"></canvas>
         </div>
       </div>
 
@@ -752,7 +645,7 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
   </div><!-- /contentArea -->
 
   <!-- Budget screen -->
-  <div id="budgetScreen" style="display:none;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h)+8px);scrollbar-width:none;">
+  <div id="budgetScreen" style="display:none;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--tab-h) + 20px);scrollbar-width:none;">
     <div style="padding:var(--sp4) 0 0;" id="budgetContent"></div>
   </div>
 
@@ -802,7 +695,6 @@ body{height:100vh;overflow:hidden;background:var(--bg);font-family:var(--sans);c
   </div>
   <div class="amt-area">
     <div class="amt-num c-out" id="amtD"><span class="amt-sym">€</span><span id="amtN">0</span></div>
-    <div id="kbHint" style="display:none;font-size:12px;color:var(--label3);margin-top:8px;">Usa la tastiera · Invio per confermare · Esc per annullare</div>
   </div>
   <div class="cats-row" id="catsRow"></div>
   <div class="note-wrap">
@@ -1045,7 +937,14 @@ function renderAll(){
 
 function renderList(list){
   const el=document.getElementById('txList');
-  if(!list.length){el.innerHTML='<div class="empty">Nessuna transazione questo mese.<br>Premi + per aggiungerne una.</div>';return;}
+  if(!list.length){
+    const hasAny=txs.length>0;
+    el.innerHTML=`<div class="empty">${hasAny
+      ? 'Nessuna transazione questo mese.<br><span style="font-size:13px;opacity:.6;">Usa ‹ › per navigare tra i mesi o premi + per aggiungere.</span>'
+      : 'Nessuna transazione ancora.<br>Premi + per aggiungerne una<br>o importa i dati storici dalla Panoramica.'
+    }</div>`;
+    return;
+  }
   const sorted=[...list].sort((a,b)=>new Date(b.date)-new Date(a.date));
   const groups={};
   sorted.forEach(t=>{const k=new Date(t.date).toISOString().split('T')[0];(groups[k]=groups[k]||[]).push(t);});
@@ -1118,8 +1017,6 @@ function toggleSheet(){sheetOpen?closeSheet():openSheet();}
 function openSheet(){
   sheetOpen=true;amtStr='';selCat=null;txType='out';
   document.getElementById('noteInput').value='';
-  const hint=document.getElementById('kbHint');
-  if(hint) hint.style.display=isDesktop()?'block':'none';
   updateSheet();renderCats();
   document.getElementById('sheet').classList.add('show');
   document.getElementById('overlay').classList.add('show');
@@ -1411,6 +1308,7 @@ function buildProjection(){
 function isDark(){ return matchMedia('(prefers-color-scheme:dark)').matches; }
 
 function renderPan(){
+  if(typeof Chart === 'undefined'){ setTimeout(renderPan, 200); return; }
   // Show import banner only if we have fewer than 100 transactions (no historical import yet)
   const banner=document.getElementById('importBanner');
   if(banner){
@@ -1699,27 +1597,25 @@ const MONEFY_DATA=[{"id":"b46dc2cf4df74876","date":"2022-02-18T00:00:00Z","type"
 
 function importMonefy(){
   haptic('medium');
-  const existing=txs.length;
-  // Merge: skip IDs already present
-  const existingDates=new Set(txs.map(t=>t.date.slice(0,10)));
   let added=0;
   MONEFY_DATA.forEach(t=>{
-    // Avoid duplicates by checking same date+category+amount
     const key=t.date.slice(0,10)+'|'+t.category+'|'+t.amount;
     const dup=txs.some(x=>x.date.slice(0,10)+'|'+x.category+'|'+x.amount===key);
     if(!dup){txs.push(t);added++;}
   });
   save(txs);
+  // Reset view to current real month
+  cy=now.getFullYear(); cm=now.getMonth();
   renderAll();
-  if(activeTab===3)renderPan();
+  if(activeTab===3) renderPan();
   haptic('success');
-  toast(`Importate ${added} transazioni storiche`);
-  // Hide import banner
+  toast('Importate '+added+' transazioni storiche ✓');
   const banner=document.getElementById('importBanner');
-  if(banner)banner.style.display='none';
+  if(banner) banner.style.display='none';
 }
 
 function clearAndImportMonefy(){
+  if(!confirm('Eliminare tutti i dati esistenti e importare da Monefy?')) return;
   txs=[];
   save(txs);
   importMonefy();
@@ -1888,7 +1784,6 @@ initPages();
 renderAll();
 
 // ── Desktop keyboard shortcuts ─────────────────────────────────────────────
-const isDesktop = () => window.innerWidth >= 768;
 
 document.addEventListener('keydown', e => {
   // Arrow keys → change month (only when sheet is closed)
@@ -1903,14 +1798,9 @@ document.addEventListener('keydown', e => {
     return;
   }
   // On desktop, typing digits/backspace fills amount when sheet is open
-  if(sheetOpen && isDesktop()){
-    if(e.key>='0' && e.key<='9') { kp(e.key); return; }
-    if(e.key==='.' || e.key===',') { kp('.'); return; }
-    if(e.key==='Backspace') { kp('del'); return; }
-    if(e.key==='Enter') { confirmTx(); return; }
-  }
+
 });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
 </body>
 </html>
