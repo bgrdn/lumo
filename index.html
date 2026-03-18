@@ -1,37 +1,3 @@
-
-.key{
-  border-radius:50%;
-  border:none;
-  background:var(--bg3);
-  font-family:var(--mono);
-  font-size:28px;
-  font-weight:400;
-  color:var(--label);
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  line-height:1;
-  width:100%;
-  height:100%;
-  box-shadow:0 1px 0 rgba(0,0,0,0.08);
-  transition:background .08s, transform .08s;
-  -webkit-user-select:none;
-}
-@media(prefers-color-scheme:dark){
-  .key{box-shadow:none;background:#2c2c2e;}
-}
-.key:active{background:var(--label4);transform:scale(.94);}
-.key.zero{
-  grid-column:span 2;
-  border-radius:100px;
-  justify-content:flex-start;
-  padding-left:calc(35px + var(--sp1));
-}
-.key.dot{font-size:32px;line-height:0;padding-bottom:4px;}
-.key.del{background:var(--bg3);box-shadow:0 1px 0 rgba(0,0,0,0.08);color:var(--label2);}
-@media(prefers-color-scheme:dark){.key.del{background:#2c2c2e;box-shadow:none;}}
-.key.del:active{background:var(--label4);transform:scale(.94);}
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -453,6 +419,40 @@ body{height:100dvh;overflow:hidden;background:var(--bg);font-family:var(--sans);
 
 
 
+
+.key{
+  border-radius:50%;
+  border:none;
+  background:var(--bg3);
+  font-family:var(--mono);
+  font-size:28px;
+  font-weight:400;
+  color:var(--label);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  width:100%;
+  height:100%;
+  box-shadow:0 1px 0 rgba(0,0,0,0.08);
+  transition:background .08s, transform .08s;
+  -webkit-user-select:none;
+}
+@media(prefers-color-scheme:dark){
+  .key{box-shadow:none;background:#2c2c2e;}
+}
+.key:active{background:var(--label4);transform:scale(.94);}
+.key.zero{
+  grid-column:span 2;
+  border-radius:100px;
+  justify-content:flex-start;
+  padding-left:calc(35px + var(--sp1));
+}
+.key.dot{font-size:32px;line-height:0;padding-bottom:4px;}
+.key.del{background:var(--bg3);box-shadow:0 1px 0 rgba(0,0,0,0.08);color:var(--label2);}
+@media(prefers-color-scheme:dark){.key.del{background:#2c2c2e;box-shadow:none;}}
+.key.del:active{background:var(--label4);transform:scale(.94);}
 </style>
 </head>
 <body>
